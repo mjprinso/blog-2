@@ -13,6 +13,34 @@ use Illuminate\Http\Request;
 |
 */
 
+/* Route::fallback(function(){
+    return response()->json(['error' => 'API Resource not found.'], 404);
+})->name('fallback');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+}); */
+
+
+
+/* Route::group(['middleware' => 'auth:api'], function() {
+    Route::get('articles', 'ArticleController@index');
+    Route::get('articles/{article}', 'ArticleController@show');
+    Route::post('articles', 'ArticleController@store');
+    Route::put('articles/{article}', 'ArticleController@update');
+    Route::delete('articles/{article}', 'ArticleController@delete');
 });
+
+Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout'); */
+
+Route::post('login', 'API\UserController@login');
+Route::post('register', 'API\UserController@register');
+// Route::post('logout', 'API\UserController@logout');
+
+Route::group(['middleware' => 'auth:api'], function(){
+Route::post('details', 'API\UserController@details');
+Route::post('logout', 'API\UserController@logout');
+});
+

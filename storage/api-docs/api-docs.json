@@ -1,0 +1,36 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/resource.json": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "oauth2": {
+                "type": "oauth2",
+                "description": "Oauth2 security",
+                "name": "oauth2",
+                "in": "header",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "oauth/token",
+                        "scopes": []
+                    }
+                },
+                "bearerFormat": "bearer",
+                "scheme": "http"
+            }
+        }
+    }
+}

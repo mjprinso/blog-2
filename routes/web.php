@@ -11,6 +11,18 @@
 |
 */
 
-Route::get('/', function () {
+/* Route::fallback(function(){
+    return response()->json(['error' => 'Normal Resource not found.'], 404);
+})->name('fallback'); */
+
+// Route::post('register', 'Auth\RegisterController@register');
+// Route::post('login', 'Auth\LoginController@login');
+// Route::post('logout', 'Auth\LoginController@logout');
+
+Auth::routes();
+
+
+
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */

@@ -3,7 +3,15 @@
 namespace App\Exceptions;
 
 use Exception;
+use Request;
+use Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+// use Illuminate\Auth\AuthenticationException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +54,51 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // This will replace our 404 response with
+        // a JSON response.
+        /*  if ($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'error' => 'Resource not found'
+            ], 404);
+        } */
+
+        /*  if ($exception instanceof ModelNotFoundException && $request->wantsJson()) {
+            return response()->json([
+                'data' => 'Resource not found for json response'
+            ], 404);
+        }
+        else {
+            return response()->json([
+                'error' => 'Resource not found for normal page'
+            ], 404);
+        } */
+
+        // return parent::render($request, $exception);
+
+        // This will replace our 404 response with a JSON response.
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'error' => 'Resource item not found.'
+            ], 404);
+        }
+
+        if ($exception instanceof NotFoundHttpException) {
+            return response()->json([
+                'error' => 'Resource not found.'
+            ], 404);
+        }
+
+        if ($exception instanceof MethodNotAllowedHttpException) {
+            return response()->json([
+                'error' => 'Method not allowed.'
+            ], 405);
+        }
+
         return parent::render($request, $exception);
     }
+
+   /*  protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return response()->json(['error' => 'Unauthenticated'], 401);
+    } */
 }
