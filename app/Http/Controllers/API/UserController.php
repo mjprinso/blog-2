@@ -50,6 +50,29 @@ class UserController extends Controller
         }
     } */
 
+    /**
+     * @OA\Post(path="/blog-me/public/api/login",
+     *   tags={"store"},
+     *   summary="Place an order for a pet",
+     *   description="",
+     *   operationId="placeOrder",
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="order placed for purchasing the pet",
+     *      @OA\JsonContent(
+     *         type="object",
+     *         @OA\Property(property="email", type="string"),
+     *          @OA\Property(property="password", type="string"),
+     *          @OA\Property(property="c_password", type="string"),
+     *     )
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="successful operation",
+     *   ),
+     *   @OA\Response(response=400, description="Invalid Order")
+     * )
+     */
     public function login()
     {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
@@ -89,6 +112,27 @@ class UserController extends Controller
      * details api
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Post(path="/blog-me/public/api/details",
+     *   tags={"store"},
+     *   summary="Returns pet user details",
+     *   description="Returns logged in user details",
+     *   operationId="getInventory",
+     *     security={
+     *         {"bearerAuth": {}}
+     *     },
+     *   @OA\Response(
+     *     @OA\MediaType(mediaType="application/json"),
+     *     response=200,
+     *     description="My Response"
+     *   ),
+     *   @OA\Response(
+     *     @OA\MediaType(mediaType="application/json"),
+     *     response="default",
+     *     description="an ""unexpected"" error"
+     *   )
+     * )
      */
     public function details()
     {

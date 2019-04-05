@@ -5,6 +5,75 @@
         "version": "0.1"
     },
     "paths": {
+        "/blog-me/public/api/login": {
+            "post": {
+                "tags": [
+                    "store"
+                ],
+                "summary": "Place an order for a pet",
+                "description": "",
+                "operationId": "placeOrder",
+                "requestBody": {
+                    "description": "order placed for purchasing the pet",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "c_password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid Order"
+                    }
+                }
+            }
+        },
+        "/blog-me/public/api/details": {
+            "post": {
+                "tags": [
+                    "store"
+                ],
+                "summary": "Returns pet user details",
+                "description": "Returns logged in user details",
+                "operationId": "getInventory",
+                "responses": {
+                    "200": {
+                        "description": "My Response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "default": {
+                        "description": "an \"unexpected\" error",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/resource.json": {
             "get": {
                 "responses": {
@@ -17,19 +86,13 @@
     },
     "components": {
         "securitySchemes": {
-            "oauth2": {
-                "type": "oauth2",
+            "bearerAuth": {
+                "type": "http",
                 "description": "Oauth2 security",
                 "name": "oauth2",
                 "in": "header",
-                "flows": {
-                    "clientCredentials": {
-                        "tokenUrl": "oauth/token",
-                        "scopes": []
-                    }
-                },
-                "bearerFormat": "bearer",
-                "scheme": "http"
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

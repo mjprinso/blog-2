@@ -20,20 +20,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  * )
  */
 
- /**
+/**
  * @OA\SecurityScheme(
- *     @OA\Flow(
- *         flow="clientCredentials",
- *         tokenUrl="oauth/token",
- *         scopes={}
- *     ),
- *     securityScheme="oauth2",
+ *
+ *     securityScheme="bearerAuth",
  *     in="header",
- *     type="oauth2",
+ *     type="http",
  *     description="Oauth2 security",
  *     name="oauth2",
- *     scheme="http",
- *     bearerFormat="bearer",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
  * )
  */
 

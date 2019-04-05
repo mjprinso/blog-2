@@ -19,7 +19,7 @@
 // Route::post('login', 'Auth\LoginController@login');
 // Route::post('logout', 'Auth\LoginController@logout');
 
-Auth::routes();
+// Auth::routes();
 
 
 
